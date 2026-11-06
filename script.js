@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const tabs = [...document.querySelectorAll('.tab')];
+    const tabs = [...document.querySelectorAll('nav .tab')];
 
     const inicio = document.getElementById('inicio');
     const panelBusqueda = document.getElementById('panel-busqueda-filtrada');
@@ -250,18 +250,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
-    function cerrarPaneles() {
+   function cerrarPaneles() {
+    panelBusqueda?.classList.remove('mostrar');
 
-        panelBusqueda?.classList.remove('mostrar');
+    fondoCatalogo?.classList.remove('abierto');
+    fondoCatalogo?.setAttribute('aria-hidden', 'true');
 
-        fondoCatalogo?.classList.remove('abierto');
+    document.body.classList.remove('mostrar-mapas');
+    document.body.classList.remove('panel-abierto');
+}
 
-        fondoCatalogo?.setAttribute('aria-hidden', 'true');
+function volverAInicio(pestana) {
+    cerrarPaneles();
 
-        document.body.classList.remove('panel-abierto');
+    // Inicio siempre permanece activo.
+    inicio?.classList.add('activa');
 
+    actualizarPestanaActiva(pestana);
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+function mostrarMapa(pestana) {
+    cerrarPaneles();
+
+    document.body.classList.add('mostrar-mapas');
+
+    inicio?.classList.add('activa');
+
+    actualizarPestanaActiva(pestana);
+
+    requestAnimationFrame(() => {
+        mapaGPS?.resize();
+    });
+}
+
+function alternarBusqueda(pestana) {
+    const debeAbrir = !panelBusqueda.classList.contains('mostrar');
+
+    cerrarPaneles();
+
+    if (debeAbrir) {
+        panelBusqueda.classList.add('mostrar');
+        document.body.classList.add('panel-abierto');
+        actualizarPestanaActiva(pestana);
+    } else {
+        volverAInicio(
+            tabs.find(tab =>
+                tab.querySelector('a[href="#inicio"]')
+            )
+        );
     }
+}
 
+function alternarCatalogo(pestana) {
+    const debeAbrir = !fondoCatalogo.classList.contains('abierto');
+
+    cerrarPaneles();
+
+    if (debeAbrir) {
+        fondoCatalogo.classList.add('abierto');
+        fondoCatalogo.setAttribute('aria-hidden', 'false');
+
+        document.body.classList.add('panel-abierto');
+
+        actualizarPestanaActiva(pestana);
+    } else {
+        volverAInicio(
+            tabs.find(tab =>
+                tab.querySelector('a[href="#inicio"]')
+            )
+        );
+    }
+}
     function mostrarSeccion(seccion, pestana) {
 
         if (!seccion) return;
@@ -384,11 +448,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 mostrarMapa(tab);
 
             } else if (destino?.startsWith('#')) {
+
                 const seccion = document.getElementById(destino.slice(1));
+
                 if (seccion?.classList.contains('seccion-contenido')) {
                     mostrarSeccion(seccion, tab);
                 }
+
             }
+
         });
 
     });
@@ -430,10 +498,13 @@ document.addEventListener('DOMContentLoaded', () => {
             inicio,
             tabs.find(tab => tab.querySelector('a[href="#inicio"]'))
         );
+
     });
 
     document.addEventListener('keydown', evento => {
+
         if (evento.key === 'Escape') {
+
             if (
                 fondoCatalogo?.classList.contains('abierto') ||
                 panelBusqueda?.classList.contains('mostrar')
@@ -443,8 +514,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     inicio,
                     tabs.find(tab => tab.querySelector('a[href="#inicio"]'))
                 );
+
             }
+
         }
+
     });
 
     if (contenedorMapa && window.maplibregl) {
@@ -484,12 +558,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         type: 'raster',
                         source: 'osm'
                     }
+
                 ]
+
             },
 
             center: coordenadas.sedeA,
 
             zoom: 16
+
         });
 
         mapaGPS.addControl(
@@ -521,9 +598,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 nombre: 'SEDE E',
                 coordenadas: coordenadas.sedeE,
                 color: '#a317db'
-            }
-
-        ];
+            },
+            {
+                nombre: "Consultorio Juridico",
+                coordenadas: [-75.39449151876225, 9.293416570844506],
+                color: "#36a6a6"
+            },
+            {
+                nombre: "Consultorio Juridico",
+                coordenadas: [-75.39212997285009, 9.300178847803666,],
+                color: "#001ea2"
+                }
+            ];
 
         sedesGPS.forEach(sede => {
 
@@ -631,15 +717,21 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         mostrarMapa(pestanaMapa);
+
         mapaGPS?.flyTo({
+
             center: punto,
+
             zoom: 19,
+
             essential: true
 
         });
 
         if (mapaGPS && window.maplibregl) {
+
             popupBusqueda?.remove();
+
             popupBusqueda = new maplibregl.Popup({
 
                 offset: 25
@@ -647,7 +739,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
 
                 .setLngLat(punto)
+
                 .setText(`${destino} — ${claveSede}`)
+
                 .addTo(mapaGPS);
 
         }
@@ -666,14 +760,19 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     function crearTarjetaServicio(nombreServicio) {
+
         const tarjeta = document.createElement('div');
+
         tarjeta.className = 'aula-item';
-        
+
         const nombre = document.createElement('span');
 
         nombre.className = 'aula-nombre';
+
         nombre.textContent = nombreServicio;
+
         const semaforo = document.createElement('div');
+
         semaforo.className = 'aula-semaforo';
 
         const estados = [
@@ -696,22 +795,33 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         estados.forEach(estado => {
+
             const luz = document.createElement('button');
+
             luz.type = 'button';
+
             luz.className = `aula-luz ${estado.clase}`;
+
             luz.title = estado.texto;
+
             luz.setAttribute('aria-label', estado.texto);
+
             luz.setAttribute('aria-pressed', 'false');
+
             luz.addEventListener('click', evento => {
+
                 evento.stopPropagation();
+
                 semaforo.querySelectorAll('.aula-luz').forEach(otra => {
 
                     otra.classList.remove('activa');
+
                     otra.setAttribute('aria-pressed', 'false');
 
                 });
 
                 luz.classList.add('activa');
+
                 luz.setAttribute('aria-pressed', 'true');
 
             });
@@ -741,7 +851,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (fotoSede) {
+
             fotoSede.src = opcion.foto;
+
             fotoSede.alt = `Fotografía de ${opcion.nombre}`;
 
         }
@@ -751,6 +863,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (catalogo) {
+
             catalogo.style.setProperty(
                 '--color-sede',
                 coloresSede[boton.dataset.sede]
@@ -759,76 +872,111 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         pestanasSede.forEach(pestana => {
+
             pestana.classList.toggle(
                 'activa',
                 pestana === boton
             );
+
         });
 
         if (!listaAulas) return;
+
         listaAulas.replaceChildren();
+
         const secciones = serviciosPorSeccion[opcion.clave];
+
         if (secciones) {
 
             secciones.forEach(seccion => {
 
                 const contenedorSeccion = document.createElement('div');
+
                 contenedorSeccion.className = 'grupo-servicios';
+
                 const titulo = document.createElement('h3');
+
                 titulo.className = 'titulo-seccion-servicios';
+
                 titulo.textContent = seccion.titulo;
+
                 const lista = document.createElement('div');
+
                 lista.className = 'lista-servicios-seccion';
+
                 seccion.servicios.forEach(servicio => {
 
                     lista.appendChild(
                         crearTarjetaServicio(servicio)
                     );
+
                 });
-                
+
                 contenedorSeccion.append(titulo, lista);
+
                 listaAulas.appendChild(contenedorSeccion);
+
             });
+
             return;
 
         }
+
         const opciones = aulasPorSede[opcion.clave] || [];
+
         if (!opciones.length) {
+
             listaAulas.textContent =
                 'No hay aulas ni servicios configurados para esta sede.';
+
             return;
 
         }
 
         opciones.forEach(nombre => {
+
             listaAulas.appendChild(
                 crearTarjetaServicio(nombre)
             );
+
         });
+
     }
 
     pestanasSede.forEach(boton => {
+
         boton.addEventListener('click', () => {
             mostrarContenidoSede(boton);
         });
+
     });
 
     document.querySelectorAll('[data-abrir-catalogo]').forEach(boton => {
+
         boton.addEventListener('click', () => {
+
             alternarCatalogo(
                 tabs.find(tab => tab.querySelector('#btnCatalogo'))
             );
+
         });
+
     });
 
     cerrarPaneles();
+
     document.body.classList.remove('mostrar-mapas');
+
     ocultarSecciones();
+
     inicio?.classList.add('activa');
+
     actualizarPestanaActiva(
         tabs.find(tab => tab.querySelector('a[href="#inicio"]'))
     );
+
     document.querySelector(
         '.pestanas button[data-sede="A"]'
     )?.click();
+
 });
