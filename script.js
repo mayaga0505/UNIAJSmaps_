@@ -195,27 +195,24 @@ document.addEventListener('DOMContentLoaded', () => {
             titulo: 'OPCIONES DISPONIBLES'
         }
     };
+const coordenadas = {
+    sedeA: [-75.39255022285737, 9.299830560649003],
+    sedeB: [-75.39287208789415, 9.299819972892063],
+    sedeC: [-75.39222835779383, 9.296251859825508],
+    sedeE: [-75.39246439218248, 9.299174115309201],
+    consultorio: [-75.39449151876225, 9.293416570844506],
+    clinica: [-75.39212997285009, 9.300178847803666]
+};
 
-    const coordenadas = {
-
-        sedeA: [-75.39255022285737, 9.299830560649003],
-        sedeB: [-75.39287208789415, 9.299819972892063],
-        sedeC: [-75.39222835779383, 9.296251859825508],
-        sedeE: [-75.39246439218248, 9.299174115309201]
-
-    };
-
-    const coloresSede = {
-
-        A: '#db2800',
-        B: '#edd51e',
-        C: '#e75480',
-        E: '#a317db',
-        consultorio: '#36a6a6',
-        clinica: '#001ea2',
-        restaurante: '#219008'
-
-    };
+const coloresSede = {
+    A: '#db2800',
+    B: '#edd51e',
+    C: '#e75480',
+    E: '#a317db',
+    consultorio: '#36a6a6',
+    clinica: '#001ea2',
+    restaurante: '#219008'
+};
 
     let mapaGPS = null;
     let popupBusqueda = null;
@@ -260,11 +257,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('panel-abierto');
 }
 
+
+function ocultarSeccionesSecundarias(seccionVisible = null) {
+    document.querySelectorAll('.seccion-contenido').forEach(seccion => {
+        if (seccion !== inicio && seccion !== seccionVisible) {
+            seccion.classList.remove('activa');
+        }
+    });
+
+    // Inicio permanece siempre activo.
+    inicio?.classList.add('activa');
+
+    // Si hay una sección secundaria seleccionada, mostrarla.
+    seccionVisible?.classList.add('activa');
+}
+
 function volverAInicio(pestana) {
     cerrarPaneles();
 
-    // Inicio siempre permanece activo.
-    inicio?.classList.add('activa');
+    ocultarSeccionesSecundarias();
+
+    document.body.classList.remove('mostrar-mapas');
 
     actualizarPestanaActiva(pestana);
 
@@ -277,14 +290,84 @@ function volverAInicio(pestana) {
 function mostrarMapa(pestana) {
     cerrarPaneles();
 
-    document.body.classList.add('mostrar-mapas');
+    ocultarSeccionesSecundarias();
 
-    inicio?.classList.add('activa');
+    document.body.classList.add('mostrar-mapas');
 
     actualizarPestanaActiva(pestana);
 
     requestAnimationFrame(() => {
         mapaGPS?.resize();
+    });
+}
+
+function alternarBusqueda(pestana) {
+    if (!panelBusqueda) return;
+
+    const debeAbrir = !panelBusqueda.classList.contains('mostrar');
+
+    cerrarPaneles();
+
+    if (debeAbrir) {
+        ocultarSeccionesSecundarias();
+
+        panelBusqueda.classList.add('mostrar');
+        document.body.classList.add('panel-abierto');
+
+        actualizarPestanaActiva(pestana);
+    } else {
+        volverAInicio(
+            tabs.find(tab =>
+                tab.querySelector('a[href="#inicio"]')
+            )
+        );
+    }
+}
+
+function alternarCatalogo(pestana) {
+    if (!fondoCatalogo) return;
+
+    const debeAbrir = !fondoCatalogo.classList.contains('abierto');
+
+    cerrarPaneles();
+
+    if (debeAbrir) {
+        ocultarSeccionesSecundarias();
+
+        fondoCatalogo.classList.add('abierto');
+        fondoCatalogo.setAttribute('aria-hidden', 'false');
+
+        document.body.classList.add('panel-abierto');
+
+        actualizarPestanaActiva(pestana);
+    } else {
+        volverAInicio(
+            tabs.find(tab =>
+                tab.querySelector('a[href="#inicio"]')
+            )
+        );
+    }
+}
+
+function mostrarSeccion(seccion, pestana) {
+    if (!seccion) return;
+
+    cerrarPaneles();
+
+    document.body.classList.remove('mostrar-mapas');
+
+    if (seccion === inicio) {
+        volverAInicio(pestana);
+        return;
+    }
+
+    ocultarSeccionesSecundarias(seccion);
+
+    actualizarPestanaActiva(pestana);
+
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
 }
 
@@ -537,11 +620,11 @@ function alternarCatalogo(pestana) {
 
                         type: 'raster',
 
-                        tiles: [
-                            'https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
-                            'https://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
-                            'https://c.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
-                        ],
+                       tiles: [
+    'https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+    'https://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+    'https://c.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
+],
 
                         tileSize: 256,
 
@@ -576,40 +659,38 @@ function alternarCatalogo(pestana) {
 
         const sedesGPS = [
 
-            {
-                nombre: 'SEDE A',
-                coordenadas: coordenadas.sedeA,
-                color: '#e10000'
-            },
+    {
+        nombre: "SEDE A",
+        coordenadas: [-75.39255022285737, 9.299830560649003],
+        color: "#e10000"
+    },
+    {
+        nombre: "SEDE B",
+        coordenadas: [-75.39287208789415, 9.299819972892063],
+        color: "#edd51e"
+    },
+    {
+        nombre: "SEDE C",
+        coordenadas: [-75.39222835779383, 9.296251859825508],
+        color: "#e75480"
+    },
+    {
+        nombre: "SEDE E",
+        coordenadas: [-75.39246439218248, 9.299174115309201],
+        color: "#a317db"
+    },
+    {
+        nombre: "Consultorio Juridico",
+        coordenadas: [-75.39449151876225, 9.293416570844506],
+        color: "#36a6a6"
+    },
+    {
+        nombre: "Consultorio Juridico",
+        coordenadas: [-75.39212997285009, 9.300178847803666],
+        color: "#001ea2"
+    }
 
-            {
-                nombre: 'SEDE B',
-                coordenadas: coordenadas.sedeB,
-                color: '#edd51e'
-            },
-
-            {
-                nombre: 'SEDE C',
-                coordenadas: coordenadas.sedeC,
-                color: '#e75480'
-            },
-
-            {
-                nombre: 'SEDE E',
-                coordenadas: coordenadas.sedeE,
-                color: '#a317db'
-            },
-            {
-                nombre: "Consultorio Juridico",
-                coordenadas: [-75.39449151876225, 9.293416570844506],
-                color: "#36a6a6"
-            },
-            {
-                nombre: "Consultorio Juridico",
-                coordenadas: [-75.39212997285009, 9.300178847803666,],
-                color: "#001ea2"
-                }
-            ];
+];
 
         sedesGPS.forEach(sede => {
 
