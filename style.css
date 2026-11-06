@@ -1,0 +1,1182 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #fff5ed;
+    color: #0b2239;
+    margin: 0;
+}
+header {
+    height: 70px;
+    width: 100%;
+    background-color: #01286e;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    position: sticky;
+    top: 0px;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+/* logo */
+header img:first-child {
+    height: 35px;
+    width: 180px;
+    object-fit: cover;
+    
+}
+/* perfil */
+header button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 48%;
+    border: none;
+    background-color:#01286e ;
+    gap: 15px;
+}
+header img:last-child {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;   
+}
+.header-img, .header-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*------------------- Barra opciones (menu) */
+nav {
+    position: sticky;
+    top: 70px;
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    z-index: 999;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 70px;
+    margin: 0;
+    padding: 0;
+}
+.tab a {
+    display: block;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 32px;
+    color: #000 rgba (0, 0, 0, 0.80);;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+.tab{
+ flex: 0 0 auto;
+}
+.tab:hover a {
+    background: #333;
+    color: #fff;
+}
+
+.tab.activa a {
+    background: #000;
+    color: #fff;
+}
+/* boton configuración */
+nav button{
+    border: none;
+    border-radius: 50%;
+    background-color: #ffff;
+    margin-left: auto;
+}
+nav img{ 
+    height: 22px;
+    width: 25px;
+    border-radius:52%;
+    margin-left: auto;
+}
+nav li {
+    margin: 0 35px;
+    color: #063478;
+    font-size: 16px;
+}
+nav li:hover {
+    color: #063478;
+    cursor: pointer;
+}
+section div {
+    background-color: #ffffed;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* ------------imagen que esta de fondo */
+.banner {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+/* -----------texto y sus transiciones */
+#texto-banner {
+    position: absolute;
+    top: 120px;
+    left: 90px;
+    width: 500px;
+    font-size: 38px;
+    line-height: 1.2;
+    color: #00162a;
+    margin: 0;
+    transition: opacity 0.7s ease;
+}
+texto-banner.oculto {
+    opacity: 0;
+}
+.descubre {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #01286e;
+    color: white;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 15px 0;
+    margin-top: 30px;
+}
+/* botones de imagenes (encontraras) */
+.contenedor-button {
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff5ed;
+    margin-top: 30px;
+} 
+.contenedor-button button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff5ed;
+    border: none;
+    padding: 0;
+}
+.contenedor-button img {
+    width: 370px;
+    height: 250px;
+    object-fit: cover;
+}
+ /* mapa*/
+
+/* VENTANA DEL MAPA */
+#mapa-principal{
+    display: none;
+    position: fixed;
+    top: 110px;
+    left: 10;
+    right: 5;
+    width: 100%;
+    height: calc(70vh - 70px);
+    background: rgba(0, 0, 0, 0.80);
+    z-index: 2000;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+/* TÍTULO */
+.seccion-mapa h2 {
+    margin: 0 0 15px;
+    text-align: center;
+    color: white;
+}
+
+/* Contenedor del mapa */
+.contenedor-mapa {
+    width: 60%;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    box-sizing: border-box;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+/* MAPLIBRE */
+#mapa {
+    width: 100%;
+    height: 100%;
+}
+
+/* VISIBILIDAD */
+body.mostrar-mapas #mapa-principal {
+    display: block;
+}
+
+body.panel-abierto #mapa-principal {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    #mapa-principal {
+        padding: 12px;
+    }
+
+    .contenedor-mapa {
+        height: 400px;
+    }
+}
+ 
+ /* busqueda filrada */
+#panel-busqueda-filtrada {
+    display: none;
+    position: fixed;
+    top: 110px;
+    left: 5;
+    right: 5;
+    width: 100%;
+    height: calc(53vh - 55px);
+    background: rgba(0, 0, 0, 0.80);
+    z-index: 2000;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 20px;
+    box-sizing: border-box;
+    margin: 0;
+}
+#panel-busqueda-filtrada.mostrar {
+    display: flex;
+}
+.ventana-busqueda {
+    width: 700px;
+    max-width: 90%;
+    min-height: 50px;
+     background-image: linear-gradient(
+        rgba(200, 219, 248, 0.75),
+        rgba(176, 182, 192, 0.75)
+    ), url("mapa-sin-fondo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px 50px 35px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    text-align: center;
+}
+.ventana-busqueda h2 {
+    margin: 8 5 12px;
+    font-size: 30px;
+    color: #08003f;
+}
+.ventana-busqueda form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.ventana-busqueda fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 440px;
+    max-width: 100%;
+}
+.ventana-busqueda label {
+    display: none;
+}
+.ventana-busqueda select {
+    width: 100%;
+    height: 28px;
+    border: none;
+    padding: 3px 10px;
+    font-size: 16px;
+    color: #555;
+    background-color: white;
+}
+#btnBuscar {
+    display: inline-block;
+    width: 170px;
+    height: 38px;
+    border: none;
+    border-radius: 5px;
+    background-color: #a84620;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+}
+#btnBuscar:hover {
+    background-color: #ef5a20;
+    box-shadow: 0 0 20px rgba(247, 139, 96, 0.5);
+    transform: scale(1.03);
+}
+#btnBuscar:active {
+    transform: scale(0.97);
+}
+   /*-------------------------- CATÁLOGO FLOTANTE */
+
+.fondo-catalogo {
+    display: none;
+    position: fixed;
+
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.80);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.fondo-catalogo.abierto {
+    display: flex;
+}
+
+.ventana-catalogo {
+    width: 100%;
+    max-width: 1000px;
+    max-height: 95vh;
+    padding: 12px;
+    background: #9c381c;
+    border: 5px solid #68220f;
+    border-radius: 25px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.pestanas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+    background: #f8d7aa;
+    border-radius: 15px 15px 0 0;
+}
+
+.pestanas button {
+    flex: 1;
+    min-width: 70px;
+    padding: 12px 8px;
+    background: #c56b29;
+    color: #ffffff;
+    border: 2px solid #8f421b;
+    border-radius: 10px 10px 0 0;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pestanas button:hover,
+.pestanas button.activa {
+    background: #e86d8b;
+    border-color: #b73c5c;
+    color: #ffffff;
+}
+
+.pestanas button.cerrar {
+    flex: 0 0 auto;
+    min-width: auto;
+    margin-left: auto;
+    padding: 8px 12px;
+    background: #9c381c;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+.pestanas button.cerrar:hover {
+    background: #e74c3c;
+}
+
+.contenido-catalogo {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    gap: 12px;
+    padding: 15px;
+    background: #ffe5c6;
+    border: 3px solid #e7a66b;
+    border-radius: 0 0 20px 20px;
+    box-sizing: border-box;
+}
+
+.informacion-sede {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-width: 0;
+    background: #f5c99e;
+    border: 2px solid #dfa06e;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.informacion-sede img {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 280px;
+    object-fit: cover;
+    background: #ffffff;
+    border-radius: 0;
+}
+.direccion-sede {
+    flex: 1;
+    min-width: 0;
+    padding: 15px;
+    background: #f4a5a5;
+    border-top: 2px solid #d88484;
+}
+.direccion-sede h3 {
+    margin: 0 0 8px;
+    color: #9c283d;
+    font-size: 20px;
+    font-weight: bold;
+}
+.direccion-sede p {
+    margin: 0;
+    color: #713c32;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.panel-aulas {
+    min-width: 0;
+    padding: 12px;
+    background: #f7d4b2;
+    border: 2px solid #dfa06e;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+.panel-aulas h2 {
+    margin: 0 0 12px;
+    padding: 15px;
+    background: #fff3e5;
+    color: #c72e49;
+    border: 2px solid #e7b68e;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+.lista-aulas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    max-height: 310px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+.lista-aulas {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1;
+    max-height: 320px;
+    overflow-y: auto;
+    background: #f7d4b2;
+}
+.lista-aulas button {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    background: #fff3df;
+    color: #744333;
+    border: none;
+    border-radius: 10;
+    box-shadow: none;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+    transition: background 0.2s, color 0.2s;
+}
+
+.lista-aulas button:hover {
+    background: var(--color-sede, #e85d3f);
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .fondo-catalogo {
+        padding: 10px;
+    }
+
+    .ventana-catalogo {
+        padding: 8px;
+        max-height: 95vh;
+        border-radius: 18px;
+    }
+
+    .pestanas {
+        gap: 5px;
+    }
+
+    .pestanas button {
+        flex: 1 1 auto;
+        font-size: 11px;
+        padding: 9px 6px;
+    }
+
+    .contenido-catalogo {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 10px;
+    }
+
+    .informacion-sede img {
+        height: 220px;
+    }
+
+    .lista-aulas {
+        max-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pestanas button {
+        font-size: 10px;
+    }
+
+    .informacion-sede img {
+        height: 180px;
+    }
+
+    .direccion-sede h3 {
+        font-size: 18px;
+    }
+
+    .panel-aulas h2 {
+        font-size: 16px;
+    }
+
+    .lista-aulas {
+        grid-template-columns: 1fr;
+    }
+
+    .lista-aulas button {
+        font-size: 12px;
+    }
+}
+
+.pestanas button[data-sede="A"] {
+    --color-sede: #db2800;
+}
+
+.pestanas button[data-sede="B"] {
+    --color-sede: #edd51e;
+}
+
+.pestanas button[data-sede="C"] {
+    --color-sede: #e75480;
+}
+
+.pestanas button[data-sede="E"] {
+    --color-sede: #a317db;
+}
+
+.pestanas button[data-sede="consultorio"] {
+    --color-sede: #36a6a6;
+}
+
+.pestanas button[data-sede="clinica"] {
+    --color-sede: #001ea2;
+}
+
+.pestanas button[data-sede="restaurante"] {
+    --color-sede: #219008;
+}
+
+.pestanas button[data-sede].activa {
+    background: var(--color-sede);
+    color: #ffffff;
+    border-color: var(--color-sede);
+}
+
+.pestanas button[data-sede]:hover {
+    background: var(--color-sede);
+    color: #ffffff;
+}
+
+.ventana-catalogo {
+    --color-sede: #e75480;
+    border: 4px solid var(--color-sede);
+}
+
+.informacion-sede {
+    border: 2px solid var(--color-sede);
+}
+
+.direccion-sede {
+    background: color-mix(in srgb, var(--color-sede) 20%, white);
+}
+
+.direccion-sede h3 {
+    color: var(--color-sede);
+}
+
+.panel-aulas {
+    border-color: var(--color-sede);
+}
+
+.panel-aulas h2 {
+    border-left: 5px solid var(--color-sede);
+}
+/* Botones catalogo semaforo */
+
+#listaAulas .aula-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    background-color: #fff7ed;
+    border: 1px solid #d9b18c;
+    border-radius: 11px;
+}
+
+#listaAulas .aula-nombre {
+    flex: 1;
+    min-width: 0;
+    color: #654735;
+    font-size: 13px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* CARCASA DEL SEMÁFORO */
+#listaAulas .aula-semaforo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 5px 8px;
+    background: linear-gradient(145deg, #5b5b5b, #383737);
+    border: 1px solid #858383;
+    border-radius: 20px;
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.12),
+        0 2px 4px rgba(0, 0, 0, 0.25);
+    flex-shrink: 0;
+}
+
+/* CRISTALES APAGADOS */
+#listaAulas .aula-luz {
+    position: relative;
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* VERDE APAGADO */
+#listaAulas .aula-luz.verde {
+    background: radial-gradient(circle at 35% 30%,
+        #31543b, #14251a 65%, #0b120d);
+}
+
+/* AMARILLO APAGADO */
+#listaAulas .aula-luz.amarillo {
+    background: radial-gradient(circle at 35% 30%,
+        #66532b, #302510 65%, #171207);
+}
+
+/* ROJO APAGADO */
+#listaAulas .aula-luz.rojo {
+    background: radial-gradient(circle at 35% 30%,
+        #693333, #321414 65%, #170909);
+}
+
+/* REFLEJO DEL CRISTAL */
+#listaAulas .aula-luz::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    width: 8px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    filter: blur(1px);
+    pointer-events: none;
+}
+
+/* VERDE ENCENDIDO: DESOCUPADO */
+#listaAulas .aula-luz.verde.activa {
+    background: radial-gradient(circle at 45% 40%,
+        #e2ffe9 0%, #72ff91 18%, #00e83e 48%,
+        #008c26 78%, #004d16 100%);
+    border-color: #aaffbc;
+    box-shadow:
+        inset 0 0 5px rgba(255, 255, 255, 0.9),
+        0 0 5px #00ff55,
+        0 0 12px rgba(0, 255, 75, 0.95),
+        0 0 20px rgba(0, 255, 75, 0.55);
+}
+
+/* AMARILLO ENCENDIDO: RESERVADO */
+#listaAulas .aula-luz.amarillo.activa {
+    background: radial-gradient(circle at 45% 40%,
+        #fff 0%, #fffda0 15%, #ffff00 42%,
+        #ffc400 72%, #a65c00 100%);
+    border-color: #fff8a6;
+    box-shadow:
+        inset 0 0 5px rgba(255, 255, 255, 0.95),
+        0 0 5px #ffff00,
+        0 0 12px rgba(255, 240, 0, 1),
+        0 0 20px rgba(255, 220, 0, 0.65);
+}
+
+/* ROJO ENCENDIDO: OCUPADO */
+#listaAulas .aula-luz.rojo.activa {
+    background: radial-gradient(circle at 45% 40%,
+        #ffe1e1 0%, #ff7777 18%, #ff1010 45%,
+        #c40000 75%, #650000 100%);
+    border-color: #ffaaaa;
+    box-shadow:
+        inset 0 0 5px rgba(255, 255, 255, 0.85),
+        0 0 5px #ff1010,
+        0 0 12px rgba(255, 0, 0, 0.95),
+        0 0 20px rgba(255, 0, 0, 0.55);
+}
+
+#listaAulas .aula-luz.verde {
+    background-color: #78b85a;
+}
+
+#listaAulas .aula-luz.amarillo {
+    background-color: #ffb77c;
+}
+
+#listaAulas .aula-luz.rojo {
+    background-color: #c96f6f;
+}
+
+.seccion-contenido{
+    display: none;
+}
+
+.seccion-contenido.actva{
+    display: block;
+}
+
+#fondoCatalogo.seccion-contenido.actva{
+    display: flex;
+}
+
+
+/* Ocultar los mapas al iniciar */
+.seccion-mapa,
+#mapa-principal {
+    display: none;
+}
+
+/* Ocultar los mapas mientras hay un panel abierto */
+body.panel-abierto .seccion-mapa,
+body.panel-abierto #mapa-principal {
+    display: none !important;
+}
+
+/* Mostrar los mapas cuando se selecciona la opción Mapa */
+body.mostrar-mapas .seccion-mapa,
+body.mostrar-mapas #mapa-principal {
+    display: block;
+}
+/* PIE DE PAGINA */
+footer {
+    width: 100%;
+    min-height: 245px;
+    padding: 15px 12px 25px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #fff5ed;
+    color: #07316f;
+    text-align: center;
+}
+
+/* CONTENEDOR DEL TITULO, LOGO Y PIN */
+
+footer section {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    column-gap: 8px;
+    row-gap: 5px;
+}
+
+/* TITULO */
+
+footer section h2 {
+    margin: 0;
+    color: #07316f;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 800;
+    text-align: right;
+}
+
+/* LOGO */
+
+footer section img[alt="UNIAJS Maps"] {
+    display: block;
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* PIN */
+
+footer section img[alt="Ubicación"] {
+    grid-column: 1 / 3;
+    display: block;
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    margin: 0 auto;
+}
+
+/* INFORMACIÓN INSTITUCIONAL */
+
+footer > p {
+    width: 100%;
+    margin: 0;
+    color: #07316f;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: center;
+}
+
+footer > p:first-of-type {
+    margin-top: 0;
+}
+@media (max-width: 768px) {
+
+    header {
+        height: 60px;
+        padding: 0 12px;
+    }
+
+    header img:first-child {
+        width: 150px;
+        height: 36px;
+        object-fit: contain;
+    }
+
+    header img:last-child {
+        width: 42px;
+        height: 42px;
+    }
+
+    nav {
+        top: 60px;
+        height: 42px;
+        justify-content: flex-start;
+        overflow: hidden;
+    }
+
+    nav ul {
+        justify-content: flex-start;
+        gap: 4px;
+        padding: 0 6px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: none;
+    }
+
+    nav ul::-webkit-scrollbar {
+        display: none;
+    }
+
+    nav li {
+        margin: 0;
+        font-size: 12px;
+    }
+
+    .tab a {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 10px;
+    }
+
+    .banner {
+        height: 430px;
+    }
+
+    .banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #texto-banner {
+        top: 12%;
+        left: 18px;
+        width: 72%;
+        font-size: clamp(22px, 6vw, 30px);
+    }
+
+    .descubre {
+        font-size: 22px;
+        padding: 12px 0;
+    }
+
+    .contenedor-button {
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 18px auto;
+        padding: 0 10px;
+    }
+
+    .contenedor-button button {
+        width: 46%;
+        min-width: 0;
+    }
+
+    .contenedor-button img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    #mapa-principal {
+        top: 102px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: calc(100vh - 102px);
+        padding: 14px 10px;
+        overflow-y: auto;
+    }
+
+    .seccion-mapa h2 {
+        font-size: 21px;
+    }
+
+    .contenedor-mapa {
+        width: 100%;
+        height: 68vh;
+        min-height: 320px;
+        margin: 10px auto;
+    }
+
+    #mapa {
+        width: 100%;
+        height: 100%;
+    }
+
+    #panel-busqueda-filtrada {
+        top: 102px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: calc(100vh - 102px);
+        padding: 14px 10px;
+        overflow-y: auto;
+    }
+
+    .ventana-busqueda {
+        width: 100%;
+        max-width: 100%;
+        padding: 28px 16px 24px;
+    }
+
+    .ventana-busqueda h2 {
+        font-size: 23px;
+    }
+
+    .ventana-busqueda fieldset {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .ventana-busqueda select {
+        width: 100%;
+        min-height: 42px;
+    }
+
+    #btnBuscar {
+        width: 100%;
+        max-width: 190px;
+        min-height: 42px;
+    }
+
+    .fondo-catalogo {
+        padding: 8px;
+    }
+
+    .ventana-catalogo {
+        width: 100%;
+        max-width: 100%;
+        max-height: 96vh;
+        padding: 7px;
+        border-radius: 15px;
+    }
+
+    .pestanas {
+        gap: 5px;
+        padding: 7px;
+    }
+
+    .pestanas button {
+        flex: 1 1 75px;
+        min-width: 0;
+        min-height: 37px;
+        padding: 7px 5px;
+        font-size: 10px;
+    }
+
+    .pestanas button.cerrar {
+        flex: 0 0 36px;
+        min-width: 36px;
+    }
+
+    .contenido-catalogo {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 9px;
+        padding: 8px;
+    }
+
+    .informacion-sede {
+        width: 100%;
+    }
+
+    .informacion-sede img {
+        width: 100%;
+        height: 175px;
+    }
+
+    .direccion-sede {
+        padding: 12px;
+    }
+
+    .direccion-sede h3 {
+        font-size: 17px;
+    }
+
+    .panel-aulas {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .panel-aulas h2 {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .lista-aulas {
+        grid-template-columns: minmax(0, 1fr);
+        max-height: 230px;
+        gap: 8px;
+    }
+
+    #listaAulas .aula-item {
+        padding: 9px;
+    }
+
+    #listaAulas .aula-nombre {
+        font-size: 12px;
+    }
+
+    #listaAulas .aula-semaforo {
+        flex-shrink: 0;
+    }
+
+    footer {
+        padding: 18px 10px;
+    }
+
+    footer img {
+        max-width: 150px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    header img:first-child {
+        width: 135px;
+    }
+
+    nav li {
+        font-size: 11px;
+    }
+
+    .tab a {
+        padding: 0 8px;
+    }
+
+    .banner {
+        height: 380px;
+    }
+
+    #texto-banner {
+        width: 80%;
+        font-size: 22px;
+    }
+
+    .contenedor-button button {
+        width: 100%;
+    }
+
+    .contenedor-button img {
+        height: 180px;
+    }
+
+    .ventana-busqueda {
+        padding: 28px 12px 20px;
+    }
+
+    .pestanas button {
+        font-size: 10px;
+    }
+
+    .informacion-sede img {
+        height: 160px;
+    }
+
+    .lista-aulas {
+        grid-template-columns: 1fr;
+    }
+}
