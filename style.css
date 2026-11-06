@@ -790,10 +790,7 @@ body.panel-abierto #mapa-principal {
     display: none;
 }
 
-.seccion-contenido.activa{
-    display: block;
-}
-#inicio {
+.seccion-contenido.actva{
     display: block;
 }
 
@@ -895,291 +892,34 @@ footer > p {
 footer > p:first-of-type {
     margin-top: 0;
 }
-@media (max-width: 768px) {
 
-    header {
-        height: 60px;
-        padding: 0 12px;
-    }
+/* RESPONSIVE */
 
-    header img:first-child {
-        width: 150px;
-        height: 36px;
-        object-fit: contain;
-    }
-
-    header img:last-child {
-        width: 42px;
-        height: 42px;
-    }
-
-    nav {
-        top: 60px;
-        height: 42px;
-        justify-content: flex-start;
-        overflow: hidden;
-    }
-
-    nav ul {
-        justify-content: flex-start;
-        gap: 4px;
-        padding: 0 6px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scrollbar-width: none;
-    }
-
-    nav ul::-webkit-scrollbar {
-        display: none;
-    }
-
-    nav li {
-        margin: 0;
-        font-size: 12px;
-    }
-
-    .tab a {
-        height: 42px;
-        line-height: 42px;
-        padding: 0 10px;
-    }
-
-    .banner {
-        height: 430px;
-    }
-
-    .banner img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    #texto-banner {
-        top: 12%;
-        left: 18px;
-        width: 72%;
-        font-size: clamp(22px, 6vw, 30px);
-    }
-
-    .descubre {
-        font-size: 22px;
-        padding: 12px 0;
-    }
-
-    .contenedor-button {
-        flex-wrap: wrap;
-        gap: 12px;
-        margin: 18px auto;
-        padding: 0 10px;
-    }
-
-    .contenedor-button button {
-        width: 46%;
-        min-width: 0;
-    }
-
-    .contenedor-button img {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-    }
-
-    #mapa-principal {
-        top: 102px;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: calc(100vh - 102px);
-        padding: 14px 10px;
-        overflow-y: auto;
-    }
-
-    .seccion-mapa h2 {
-        font-size: 21px;
-    }
-
-    .contenedor-mapa {
-        width: 100%;
-        height: 68vh;
-        min-height: 320px;
-        margin: 10px auto;
-    }
-
-    #mapa {
-        width: 100%;
-        height: 100%;
-    }
-
-    #panel-busqueda-filtrada {
-        top: 102px;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: calc(100vh - 102px);
-        padding: 14px 10px;
-        overflow-y: auto;
-    }
-
-    .ventana-busqueda {
-        width: 100%;
-        max-width: 100%;
-        padding: 28px 16px 24px;
-    }
-
-    .ventana-busqueda h2 {
-        font-size: 23px;
-    }
-
-    .ventana-busqueda fieldset {
-        width: 100%;
-        max-width: 100%;
-    }
-
-    .ventana-busqueda select {
-        width: 100%;
-        min-height: 42px;
-    }
-
-    #btnBuscar {
-        width: 100%;
-        max-width: 190px;
-        min-height: 42px;
-    }
-
-    .fondo-catalogo {
-        padding: 8px;
-    }
-
-    .ventana-catalogo {
-        width: 100%;
-        max-width: 100%;
-        max-height: 96vh;
-        padding: 7px;
-        border-radius: 15px;
-    }
-
-    .pestanas {
-        gap: 5px;
-        padding: 7px;
-    }
-
-    .pestanas button {
-        flex: 1 1 75px;
-        min-width: 0;
-        min-height: 37px;
-        padding: 7px 5px;
-        font-size: 10px;
-    }
-
-    .pestanas button.cerrar {
-        flex: 0 0 36px;
-        min-width: 36px;
-    }
-
-    .contenido-catalogo {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 9px;
-        padding: 8px;
-    }
-
-    .informacion-sede {
-        width: 100%;
-    }
-
-    .informacion-sede img {
-        width: 100%;
-        height: 175px;
-    }
-
-    .direccion-sede {
-        padding: 12px;
-    }
-
-    .direccion-sede h3 {
-        font-size: 17px;
-    }
-
-    .panel-aulas {
-        width: 100%;
-        padding: 8px;
-    }
-
-    .panel-aulas h2 {
-        padding: 10px;
-        font-size: 16px;
-    }
-
-    .lista-aulas {
-        grid-template-columns: minmax(0, 1fr);
-        max-height: 230px;
-        gap: 8px;
-    }
-
-    #listaAulas .aula-item {
-        padding: 9px;
-    }
-
-    #listaAulas .aula-nombre {
-        font-size: 12px;
-    }
-
-    #listaAulas .aula-semaforo {
-        flex-shrink: 0;
-    }
+@media (max-width: 600px) {
 
     footer {
+        min-height: 220px;
         padding: 18px 10px;
     }
 
-    footer img {
-        max-width: 150px;
-    }
-}
-
-@media (max-width: 480px) {
-
-    header img:first-child {
-        width: 135px;
+    footer section {
+        column-gap: 5px;
     }
 
-    nav li {
+    footer section h2 {
+        font-size: 19px;
+    }
+
+    footer section img[alt="UNIAJS Maps"] {
+        width: 105px;
+    }
+
+    footer section img[alt="Ubicación"] {
+        width: 60px;
+        height: 60px;
+    }
+
+    footer > p {
         font-size: 11px;
-    }
-
-    .tab a {
-        padding: 0 8px;
-    }
-
-    .banner {
-        height: 380px;
-    }
-
-    #texto-banner {
-        width: 80%;
-        font-size: 22px;
-    }
-
-    .contenedor-button button {
-        width: 100%;
-    }
-
-    .contenedor-button img {
-        height: 180px;
-    }
-
-    .ventana-busqueda {
-        padding: 28px 12px 20px;
-    }
-
-    .pestanas button {
-        font-size: 10px;
-    }
-
-    .informacion-sede img {
-        height: 160px;
-    }
-
-    .lista-aulas {
-        grid-template-columns: 1fr;
     }
 }
