@@ -793,6 +793,9 @@ body.panel-abierto #mapa-principal {
 .seccion-contenido.activa{
     display: block;
 }
+#inicio {
+    display: block;
+}
 
 #fondoCatalogo.seccion-contenido.actva{
     display: flex;
