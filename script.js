@@ -384,15 +384,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 mostrarMapa(tab);
 
             } else if (destino?.startsWith('#')) {
-
                 const seccion = document.getElementById(destino.slice(1));
-
                 if (seccion?.classList.contains('seccion-contenido')) {
                     mostrarSeccion(seccion, tab);
                 }
-
             }
-
         });
 
     });
@@ -434,13 +430,10 @@ document.addEventListener('DOMContentLoaded', () => {
             inicio,
             tabs.find(tab => tab.querySelector('a[href="#inicio"]'))
         );
-
     });
 
     document.addEventListener('keydown', evento => {
-
         if (evento.key === 'Escape') {
-
             if (
                 fondoCatalogo?.classList.contains('abierto') ||
                 panelBusqueda?.classList.contains('mostrar')
@@ -450,11 +443,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     inicio,
                     tabs.find(tab => tab.querySelector('a[href="#inicio"]'))
                 );
-
             }
-
         }
-
     });
 
     if (contenedorMapa && window.maplibregl) {
@@ -474,7 +464,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         type: 'raster',
 
                         tiles: [
-                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+                            'https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                            'https://b.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
+                            'https://c.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
                         ],
 
                         tileSize: 256,
@@ -492,15 +484,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         type: 'raster',
                         source: 'osm'
                     }
-
                 ]
-
             },
 
             center: coordenadas.sedeA,
 
             zoom: 16
-
         });
 
         mapaGPS.addControl(
@@ -642,21 +631,15 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         mostrarMapa(pestanaMapa);
-
         mapaGPS?.flyTo({
-
             center: punto,
-
             zoom: 19,
-
             essential: true
 
         });
 
         if (mapaGPS && window.maplibregl) {
-
             popupBusqueda?.remove();
-
             popupBusqueda = new maplibregl.Popup({
 
                 offset: 25
@@ -664,9 +647,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
 
                 .setLngLat(punto)
-
                 .setText(`${destino} — ${claveSede}`)
-
                 .addTo(mapaGPS);
 
         }
@@ -685,19 +666,14 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     function crearTarjetaServicio(nombreServicio) {
-
         const tarjeta = document.createElement('div');
-
         tarjeta.className = 'aula-item';
-
+        
         const nombre = document.createElement('span');
 
         nombre.className = 'aula-nombre';
-
         nombre.textContent = nombreServicio;
-
         const semaforo = document.createElement('div');
-
         semaforo.className = 'aula-semaforo';
 
         const estados = [
@@ -720,33 +696,22 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
 
         estados.forEach(estado => {
-
             const luz = document.createElement('button');
-
             luz.type = 'button';
-
             luz.className = `aula-luz ${estado.clase}`;
-
             luz.title = estado.texto;
-
             luz.setAttribute('aria-label', estado.texto);
-
             luz.setAttribute('aria-pressed', 'false');
-
             luz.addEventListener('click', evento => {
-
                 evento.stopPropagation();
-
                 semaforo.querySelectorAll('.aula-luz').forEach(otra => {
 
                     otra.classList.remove('activa');
-
                     otra.setAttribute('aria-pressed', 'false');
 
                 });
 
                 luz.classList.add('activa');
-
                 luz.setAttribute('aria-pressed', 'true');
 
             });
@@ -776,9 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (fotoSede) {
-
             fotoSede.src = opcion.foto;
-
             fotoSede.alt = `Fotografía de ${opcion.nombre}`;
 
         }
@@ -788,7 +751,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (catalogo) {
-
             catalogo.style.setProperty(
                 '--color-sede',
                 coloresSede[boton.dataset.sede]
@@ -797,111 +759,76 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         pestanasSede.forEach(pestana => {
-
             pestana.classList.toggle(
                 'activa',
                 pestana === boton
             );
-
         });
 
         if (!listaAulas) return;
-
         listaAulas.replaceChildren();
-
         const secciones = serviciosPorSeccion[opcion.clave];
-
         if (secciones) {
 
             secciones.forEach(seccion => {
 
                 const contenedorSeccion = document.createElement('div');
-
                 contenedorSeccion.className = 'grupo-servicios';
-
                 const titulo = document.createElement('h3');
-
                 titulo.className = 'titulo-seccion-servicios';
-
                 titulo.textContent = seccion.titulo;
-
                 const lista = document.createElement('div');
-
                 lista.className = 'lista-servicios-seccion';
-
                 seccion.servicios.forEach(servicio => {
 
                     lista.appendChild(
                         crearTarjetaServicio(servicio)
                     );
-
                 });
-
+                
                 contenedorSeccion.append(titulo, lista);
-
                 listaAulas.appendChild(contenedorSeccion);
-
             });
-
             return;
 
         }
-
         const opciones = aulasPorSede[opcion.clave] || [];
-
         if (!opciones.length) {
-
             listaAulas.textContent =
                 'No hay aulas ni servicios configurados para esta sede.';
-
             return;
 
         }
 
         opciones.forEach(nombre => {
-
             listaAulas.appendChild(
                 crearTarjetaServicio(nombre)
             );
-
         });
-
     }
 
     pestanasSede.forEach(boton => {
-
         boton.addEventListener('click', () => {
             mostrarContenidoSede(boton);
         });
-
     });
 
     document.querySelectorAll('[data-abrir-catalogo]').forEach(boton => {
-
         boton.addEventListener('click', () => {
-
             alternarCatalogo(
                 tabs.find(tab => tab.querySelector('#btnCatalogo'))
             );
-
         });
-
     });
 
     cerrarPaneles();
-
     document.body.classList.remove('mostrar-mapas');
-
     ocultarSecciones();
-
     inicio?.classList.add('activa');
-
     actualizarPestanaActiva(
         tabs.find(tab => tab.querySelector('a[href="#inicio"]'))
     );
-
     document.querySelector(
         '.pestanas button[data-sede="A"]'
     )?.click();
-
 });
